@@ -888,7 +888,7 @@ contactForm.addEventListener('submit', function(e) {
       message: this.message.value
     };
 
-    fetch("https://docs.google.com/spreadsheets/d/1KnOE-SnddMM8ygunwM3IGI649z2iB9gKb4wcz8BUgrE/edit?usp=sharing", {
+    fetch("https://script.google.com/macros/s/AKfycbx7STEWht6VnBcM_LGlntMCfNM4lDjJuA6aNG7t5iRvnVcuX1LvCXqfXEUiOw9KCSxkFg/exec", {
       method: "POST",
       body: JSON.stringify(formData),
       contentType: "application/json"
