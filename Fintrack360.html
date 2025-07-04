@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FinTrack360: Smart Personal Finance Analytics</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --secondary: #3f37c9;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --gradient: linear-gradient(135deg, #4361ee 0%, #3a0ca3 100%);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        section {
+            padding: 80px 0;
+        }
+
+        h1, h2, h3 {
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+        }
+
+        h2 {
+            font-size: 2rem;
+            color: var(--primary);
+        }
+
+        p {
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 12px 30px;
+            background: var(--gradient);
+            color: white;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(67, 97, 238, 0.3);
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(67, 97, 238, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            text-align: center;
+            padding: 120px 0;
+            background: linear-gradient(135deg, rgba(248, 249, 250, 0.9) 0%, rgba(248, 249, 250, 0.95) 100%), 
+                        url('https://images.unsplash.com/photo-1554224155-6726b3ff858f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80') no-repeat center center/cover;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            margin-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            max-width: 700px;
+            margin: 0 auto 30px;
+        }
+
+        /* About Section */
+        .about {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            margin-top: -60px;
+            position: relative;
+            z-index: 1;
+        }
+
+        /* Tech Stack */
+        .tech-stack {
+            text-align: center;
+        }
+
+        .tech-icons {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 30px;
+        }
+
+        .tech-icon {
+            background: white;
+            padding: 20px;
+            border-radius: 10px;
+            width: 120px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .tech-icon:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-icon i {
+            font-size: 2.5rem;
+            margin-bottom: 10px;
+            color: var(--primary);
+        }
+
+        /* Features */
+        .features {
+            background-color: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        /* Dashboard */
+        .dashboard {
+            text-align: center;
+        }
+
+        .dashboard-embed {
+            margin-top: 40px;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Gallery */
+        .gallery {
+            background-color: #f8f9fa;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-top: 40px;
+        }
+
+        .gallery-item {
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        /* Learnings */
+        .learnings {
+            background-color: white;
+            border-radius: 10px;
+            padding: 40px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .learnings ul {
+            list-style-position: inside;
+            margin-top: 20px;
+        }
+
+        .learnings li {
+            margin-bottom: 10px;
+            color: var(--gray);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 40px 0;
+            background: var(--gradient);
+            color: white;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin: 20px 0;
+        }
+
+        .social-links a {
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            transform: translateY(-3px);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 60px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>FinTrack360</h1>
+            <h2>Bank Statement Analytics Using SQL • Python • Tableau</h2>
+            <p>From raw transactions to real financial insights.</p>
+            <a href="#dashboard" class="btn">View Dashboard</a>
+        </div>
+    </section>
+
+    <!-- About Project -->
+    <section class="container">
+        <div class="about">
+            <h2>About This Project</h2>
+            <p>FinTrack360 is a personal finance analytics project based on my real bank statements. It covers end-to-end data transformation using SQL, Python, and Tableau to discover patterns in income, expenses, savings, and spending behavior.</p>
+        </div>
+    </section>
+
+    <!-- Tech Stack -->
+    <section class="tech-stack">
+        <div class="container">
+            <h2>Tech Stack Used</h2>
+            <div class="tech-icons">
+                <div class="tech-icon">
+                    <i class="fas fa-database"></i>
+                    <p>SQL</p>
+                </div>
+                <div class="tech-icon">
+                    <i class="fab fa-python"></i>
+                    <p>Python</p>
+                </div>
+                <div class="tech-icon">
+                    <i class="fas fa-chart-bar"></i>
+                    <p>Tableau</p>
+                </div>
+                <div class="tech-icon">
+                    <i class="fas fa-cogs"></i>
+                    <p>Feature Engineering</p>
+                </div>
+                <div class="tech-icon">
+                    <i class="fas fa-search"></i>
+                    <p>EDA</p>
+                </div>
+                <div class="tech-icon">
+                    <i class="fas fa-window-restore"></i>
+                    <p>Window Functions</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features">
+        <div class="container">
+            <h2>Key Features & Insights</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <i class="fas fa-briefcase"></i>
+                    <h3>Total Income</h3>
+                    <p>₹5.89L analyzed with monthly trends</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-wallet"></i>
+                    <h3>Total Expense</h3>
+                    <p>₹5.90L with category breakdown</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-piggy-bank"></i>
+                    <h3>Savings Goal Tracker</h3>
+                    <p>₹500/month target visualization</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calendar-week"></i>
+                    <h3>Expense by Weekday</h3>
+                    <p>Spending patterns analysis</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-mobile-alt"></i>
+                    <h3>Platform Analysis</h3>
+                    <p>PhonePe, Bank, Amazon usage</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-tags"></i>
+                    <h3>Category Spending</h3>
+                    <p>Detailed breakdown by type</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Monthly Trends</h3>
+                    <p>Income vs Expense comparison</p>
+                </div>
+                <div class="feature-card">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Loan-readiness</h3>
+                    <p>Net savings calculation</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard -->
+    <section class="dashboard" id="dashboard">
+        <div class="container">
+            <h2>Interactive Dashboard</h2>
+            <div class="dashboard-embed">
+                <!-- Replace with your actual Tableau embed code -->
+                <div class='tableauPlaceholder' id='viz1751651591393' style='position: relative'>
+  <noscript>
+    <a href='#'>
+      <img alt='📊 Financial Trends & Platform Insights '
+           src='https://public.tableau.com/static/images/ba/bank_statement_tableau/FinancialTrendsPlatformInsights/1_rss.png'
+           style='border: none' />
+    </a>
+  </noscript>
+  <object class='tableauViz' style='display:none;'>
+    <param name='host_url' value='https%3A%2F%2Fpublic.tableau.com%2F' />
+    <param name='embed_code_version' value='3' />
+    <param name='site_root' value='' />
+    <param name='name' value='bank_statement_tableau/FinancialTrendsPlatformInsights' />
+    <param name='tabs' value='no' />
+    <param name='toolbar' value='yes' />
+    <param name='static_image'
+           value='https://public.tableau.com/static/images/ba/bank_statement_tableau/FinancialTrendsPlatformInsights/1.png' />
+    <param name='animate_transition' value='yes' />
+    <param name='display_static_image' value='yes' />
+    <param name='display_spinner' value='yes' />
+    <param name='display_overlay' value='yes' />
+    <param name='display_count' value='yes' />
+    <param name='language' value='en-US' />
+  </object>
+</div>
+
+<script type='text/javascript'>
+  var divElement = document.getElementById('viz1751651591393');
+  var vizElement = divElement.getElementsByTagName('object')[0];
+  if (divElement.offsetWidth > 800) {
+    vizElement.style.width = '100%';
+    vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+  } else if (divElement.offsetWidth > 500) {
+    vizElement.style.width = '100%';
+    vizElement.style.height = (divElement.offsetWidth * 0.75) + 'px';
+  } else {
+    vizElement.style.width = '100%';
+    vizElement.style.height = '2077px';
+  }
+  var scriptElement = document.createElement('script');
+  scriptElement.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
+  vizElement.parentNode.insertBefore(scriptElement, vizElement);
+</script>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery -->
+    <section class="gallery">
+        <div class="container">
+            <h2>Project Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="FinTrack360 (4)_page-0001.jpg" alt="Data Cleaning">
+                </div>
+                <div class="gallery-item">
+                    <img src="FinTrack360 (5)_page-0001.jpg" alt="EDA">
+                </div>
+                <div class="gallery-item">
+                    <img src="FinTrack360 (3)_page-0001.jpg" alt="Dashboard">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Learnings -->
+    <section class="container">
+        <div class="learnings">
+            <h2>What I Learned</h2>
+            <ul>
+                <li>Working with real-world financial data challenges</li>
+                <li>Creating a complete data pipeline from raw to insights</li>
+                <li>Structuring an industry-level analytics project</li>
+                <li>Translating data into decision-ready business insights</li>
+                <li>Automating transaction categorization logic</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <h3>FinTrack360</h3>
+            <p>Built with purpose. Backed by data.</p>
+            <div class="social-links">
+                <a href="mailto:ompx07.data@gmail.com"><i class="fas fa-envelope"></i></a>
+                <a href="https://linkedin.com/in/Om2005" target="_blank"><i class="fab fa-linkedin"></i></a>
+                <a href="https://github.com/Omprakash45" target="_blank"><i class="fab fa-github"></i></a>
+            </div>
+            <p>&copy; 2023 FinTrack360. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                const targetElement = document.querySelector(targetId);
+                
+                if (targetElement) {
+                    window.scrollTo({
+                        top: targetElement.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Animation on scroll
+        const animateOnScroll = () => {
+            const elements = document.querySelectorAll('.tech-icon, .feature-card, .gallery-item');
+            
+            elements.forEach(element => {
+                const elementPosition = element.getBoundingClientRect().top;
+                const screenPosition = window.innerHeight / 1.3;
+                
+                if (elementPosition < screenPosition) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        };
+
+        // Set initial state for animation
+        window.addEventListener('load', () => {
+            const animatedElements = document.querySelectorAll('.tech-icon, .feature-card, .gallery-item');
+            animatedElements.forEach(element => {
+                element.style.opacity = '0';
+                element.style.transform = 'translateY(20px)';
+                element.style.transition = 'all 0.6s ease';
+            });
+            
+            window.addEventListener('scroll', animateOnScroll);
+            animateOnScroll(); // Run once on load
+        });
+    </script>
+</body>
+</html>
