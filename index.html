@@ -698,13 +698,12 @@ Transforming raw data into meaningful insights that drive business decisions.</p
             <div class="contact-content">
                 <div class="contact-info fade-in delay-1">
                     <h3>Contact Information</h3>
-                    <p><i class="fas fa-envelope"></i> ompx07.data@gmail.com</p>
-                    <p><i class="fas fa-phone"></i> +91-9256376345</p>
-                    <p><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan, India</p>
-                    <div class="social-links">
-                        <a href="https://github.com/Omprakash45" target="_blank"><i class="fab fa-github"></i></a>
-                        <a href="https://linkedin.com/in/Om2005" target="_blank"><i class="fab fa-linkedin"></i></a>
-                    </div>
+                   <form id="contact-form">
+  <input type="text" name="name" placeholder="Your Name" required><br>
+  <input type="email" name="email" placeholder="Your Email" required><br>
+  <textarea name="message" placeholder="Your Message" required></textarea><br>
+  <button type="submit">Send</button>
+</form>
                 </div>
                 <!-- <form class="contact-form fade-in delay-2" id="contactForm">
                     <div class="form-group">
@@ -879,6 +878,29 @@ Transforming raw data into meaningful insights that drive business decisions.</p
                 bar.style.width = '0';
             });
         });
+        document.getElementById("contact-form").addEventListener("submit", function(e) {
+    e.preventDefault();
+
+    const formData = {
+      name: this.name.value,
+      email: this.email.value,
+      message: this.message.value
+    };
+
+    fetch("YOUR_WEB_APP_URL", {
+      method: "POST",
+      body: JSON.stringify(formData),
+      contentType: "application/json"
+    }).then(res => res.json())
+      .then(data => {
+        alert("Message sent successfully!");
+        this.reset();
+      })
+      .catch(err => {
+        alert("Failed to send message.");
+        console.error(err);
+      });
+  });
     </script>
 </body>
 </html>
