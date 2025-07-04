@@ -689,59 +689,38 @@ Transforming raw data into meaningful insights that drive business decisions.</p
             </div>
         </div>
     </section>
-
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-title fade-in">
-                <h2>Get In Touch</h2>
-            </div>
-            <div class="contact-content">
-                <div class="contact-info fade-in delay-1">
-                    <h3>Contact Information</h3>
-                   <form id="contact-form">
-  <input type="text" name="name" placeholder="Your Name" required><br>
-  <input type="email" name="email" placeholder="Your Email" required><br>
-  <textarea name="message" placeholder="Your Message" required></textarea><br>
-  <button type="submit">Send</button>
-</form>
-                </div>
-                <!-- <form class="contact-form fade-in delay-2" id="contactForm">
-                    <div class="form-group">
-                        <input type="text" class="form-control" placeholder="Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <input type="email" class="form-control" placeholder="Your Email" required>
-                    </div>
-                    <div class="form-group">
-                        <textarea class="form-control" placeholder="Your Message" required></textarea>
-                    </div>
-                    <button type="submit" class="btn">Send Message</button>
-                </form> -->
-                <form class="contact-form" action="https://formsubmit.co/ompx07.data@gmail.com" method="POST">
-    <h2>📬 Contact Me</h2>
-
-    <!-- Optional FormSubmit settings -->
-    <input type="hidden" name="_captcha" value="false">
-    <input type="hidden" name="_next" value="https://yourwebsite.com/thank-you.html"> <!-- Change this to your real thank-you page -->
-
-    <div class="form-group">
-      <input type="text" class="form-control" name="name" placeholder="Your Name" required>
-    </div>
-
-    <div class="form-group">
-      <input type="email" class="form-control" name="email" placeholder="Your Email" required>
-    </div>
-
-    <div class="form-group">
-      <textarea class="form-control" name="message" placeholder="Your Message" rows="5" required></textarea>
-    </div>
-
-    <button type="submit" class="btn">Send Message</button>
-  </form>
-
-            </div>
+<section id="contact" class="contact">
+    <div class="container">
+        <div class="section-title fade-in">
+            <h2>Get In Touch</h2>
         </div>
-    </section>
+        <div class="contact-content">
+            <div class="contact-info fade-in delay-1">
+                <h3>Contact Information</h3>
+                <p><i class="fas fa-envelope"></i> ompx07.data@gmail.com</p>
+                <p><i class="fas fa-phone"></i> +91-9256376345</p>
+                <p><i class="fas fa-map-marker-alt"></i> Jaipur, Rajasthan, India</p>
+                <div class="social-links">
+                    <a href="https://github.com/Omprakash45" target="_blank"><i class="fab fa-github"></i></a>
+                    <a href="https://linkedin.com/in/Om2005" target="_blank"><i class="fab fa-linkedin"></i></a>
+                </div>
+            </div>
+            
+            <form id="contact-form" class="contact-form fade-in delay-2">
+                <div class="form-group">
+                    <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+                </div>
+                <div class="form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+                </div>
+                <div class="form-group">
+                    <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
+                </div>
+                <button type="submit" class="btn">Send Message</button>
+            </form>
+        </div>
+    </div>
+</section>
 
     <footer>
         <div class="container">
@@ -818,16 +797,38 @@ Transforming raw data into meaningful insights that drive business decisions.</p
             });
         });
 
-        // Form submission
-        // const contactForm = document.getElementById('contactForm');
-        
-        // contactForm.addEventListener('submit', (e) => {
-        //     e.preventDefault();
-            
-        //     // Here you would typically send the form data to a server
-        //     alert('Thank you for your message! I will get back to you soon.');
-        //     contactForm.reset();
-        // });
+  // Contact Form Submission
+const contactForm = document.getElementById('contact-form');
+
+contactForm.addEventListener('submit', function(e) {
+    e.preventDefault();
+    
+    const formData = {
+        name: this.name.value,
+        email: this.email.value,
+        message: this.message.value
+    };
+
+    // Replace with your actual web app URL from Google Apps Script deployment
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbwUWqhuoeQykvvmX9mBBvWfmiAeWkHDW3BvmM7FL9pFHQ9EzqQizVYN0-AhvSZsHuEJFw/exec";
+    
+    fetch(webAppUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData)
+    })
+    .then(response => response.json())
+    .then(data => {
+        alert('Message sent successfully!');
+        contactForm.reset();
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('Failed to send message. Please try again later.');
+    });
+});
 
         // Download Resume button
         const downloadResume = document.getElementById('downloadResume');
