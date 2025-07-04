@@ -882,17 +882,22 @@ contactForm.addEventListener('submit', function(e) {
         document.getElementById("contact-form").addEventListener("submit", function(e) {
     e.preventDefault();
 
+
+    
     const formData = {
       name: this.name.value,
       email: this.email.value,
       message: this.message.value
     };
 
-    fetch("https://script.google.com/macros/s/AKfycbx7STEWht6VnBcM_LGlntMCfNM4lDjJuA6aNG7t5iRvnVcuX1LvCXqfXEUiOw9KCSxkFg/exec", {
+    fetch("https://script.google.com/macros/s/AKfycbxYrcr7vjeTK-02X5gwLFkMZJixjJmHljWofXn1qNJADtFKK2iYYUHf_jx7aIAkqISGHg/exec", {
       method: "POST",
-      body: JSON.stringify(formData),
-      contentType: "application/json"
-    }).then(res => res.json())
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(res => res.json())
       .then(data => {
         alert("Message sent successfully!");
         this.reset();
