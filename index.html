@@ -1038,42 +1038,46 @@ Transforming raw data into meaningful insights that drive business decisions.</p
 
 const contactForm = document.getElementById('contact-form');
 
-  contactForm.addEventListener('submit', function(e) {
-      e.preventDefault();
-      
-      const formData = {
-          name: this.name.value.trim(),
-          email: this.email.value.trim(),
-          message: this.message.value.trim()
-      };
+  contactForm.addEventListener('submit', function (e) {
+    e.preventDefault();
 
-      const submitBtn = this.querySelector('button[type="submit"]');
-      const originalBtnText = submitBtn.textContent;
-      submitBtn.disabled = true;
-      submitBtn.textContent = 'Sending...';
+    const formData = {
+      name: this.name.value.trim(),
+      email: this.email.value.trim(),
+      message: this.message.value.trim()
+    };
 
-      const webAppUrl = "https://script.google.com/macros/s/AKfycbxLFflMDnftPTJyNNAQQREb4QapvawvV6zPn2l5NWqDZ-btoRa4Se2mCHeky59xfbeZ3w/exec";
-      
-      fetch(webAppUrl, {
-          method: 'POST',
-          mode: 'no-cors',
-          headers: {
-              'Content-Type': 'application/json',
-          },
-          body: JSON.stringify(formData)
-      })
-      .then(() => {
-          alert('Message sent successfully!');
+    const submitBtn = this.querySelector('button[type="submit"]');
+    const originalBtnText = submitBtn.textContent;
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+
+    const webAppUrl = "https://script.google.com/macros/s/AKfycbwaDTRu4v4hjaA17_MebToYHVVVvbepN9EEKZNuvOPRcp4QAJ0V70d6x3ayd5LfcRDGlw/exec";
+
+    fetch(webAppUrl, {
+      method: 'POST',
+      mode: 'cors',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        if (data.result === "success") {
+          alert("✅ Message sent successfully!");
           contactForm.reset();
+        } else {
+          alert("⚠️ " + data.message);
+        }
       })
-      .catch((error) => {
-          console.error('Error:', error);
-          alert('Message sent (but CORS may block success check).');
-          contactForm.reset();
+      .catch(error => {
+        console.error("Error:", error);
+        alert("❌ Something went wrong. Try again.maybe Your mail is not valid.");
       })
       .finally(() => {
-          submitBtn.disabled = false;
-          submitBtn.textContent = originalBtnText;
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
       });
   });
 
