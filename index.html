@@ -421,6 +421,240 @@
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
+
+        /* =============================================
+   TABLET DEVICES (768px - 1024px)
+   ============================================= */
+@media (max-width: 1024px) {
+    .hero-content, .about-content {
+        flex-direction: column;
+    }
+
+    .hero-text, .about-text {
+        padding-right: 0;
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+
+    .hero-image {
+        margin-top: 2rem;
+    }
+
+    h1 {
+        font-size: 2.5rem;
+    }
+
+    h2 {
+        font-size: 2rem;
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 1.5rem;
+    }
+
+    .certifications-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+
+    .contact-content {
+        flex-direction: column;
+    }
+
+    .contact-info {
+        margin-bottom: 2rem;
+        text-align: center;
+    }
+}
+
+/* =============================================
+   LARGE MOBILE DEVICES (576px - 767px)
+   ============================================= */
+@media (max-width: 767px) {
+    header {
+        padding: 0.8rem 0;
+    }
+
+    .logo {
+        font-size: 1.3rem;
+    }
+
+    .hero {
+        padding-top: 70px;
+        height: auto;
+        padding-bottom: 3rem;
+    }
+
+    h1 {
+        font-size: 2.2rem;
+    }
+
+    h2 {
+        font-size: 1.8rem;
+    }
+
+    .btn {
+        padding: 0.7rem 1.3rem;
+        font-size: 0.9rem;
+    }
+
+    .projects-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-image {
+        height: 180px;
+    }
+
+    .education-item, .certification-item, .award-item {
+        padding: 1.2rem;
+    }
+
+    .item-header {
+        flex-direction: column;
+    }
+
+    .item-date {
+        margin-top: 0.3rem;
+    }
+
+    .form-control {
+        padding: 0.7rem;
+    }
+}
+
+/* =============================================
+   SMALL MOBILE DEVICES (up to 575px)
+   ============================================= */
+@media (max-width: 575px) {
+    .container {
+        padding: 0 15px;
+    }
+
+    h1 {
+        font-size: 2rem;
+        line-height: 1.2;
+    }
+
+    h2 {
+        font-size: 1.6rem;
+        margin-bottom: 1.2rem;
+    }
+
+    h3 {
+        font-size: 1.3rem;
+    }
+
+    .hero-text pre {
+        font-size: 0.9rem;
+        white-space: pre-wrap;
+        word-wrap: break-word;
+    }
+
+    .btn {
+        display: block;
+        width: 100%;
+        margin-bottom: 0.8rem;
+    }
+
+    .btn-outline {
+        margin-left: 0;
+    }
+
+    .skills-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .project-tag {
+        font-size: 0.7rem;
+        padding: 0.2rem 0.6rem;
+    }
+
+    .contact-form {
+        padding: 0 10px;
+    }
+
+    footer p {
+        font-size: 0.9rem;
+    }
+}
+
+/* =============================================
+   ORIENTATION-SPECIFIC ADJUSTMENTS
+   ============================================= */
+@media (max-width: 767px) and (orientation: landscape) {
+    .hero {
+        height: auto;
+        padding: 80px 0 2rem;
+    }
+
+    .hero-content {
+        flex-direction: row;
+        align-items: center;
+    }
+
+    .hero-text {
+        padding-right: 1rem;
+        margin-bottom: 0;
+        text-align: left;
+    }
+
+    .hero-image {
+        margin-top: 0;
+    }
+}
+
+/* =============================================
+   NAVIGATION FOR MOBILE
+   ============================================= */
+@media (max-width: 768px) {
+    .nav-links {
+        position: fixed;
+        top: 70px;
+        left: 0;
+        width: 100%;
+        background-color: var(--secondary-color);
+        flex-direction: column;
+        align-items: center;
+        padding: 1rem 0;
+        transform: translateY(-150%);
+        transition: transform 0.3s ease;
+        z-index: 999;
+    }
+
+    .nav-links.active {
+        transform: translateY(0);
+    }
+
+    .nav-links li {
+        margin: 0.8rem 0;
+    }
+
+    .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        color: var(--light-text);
+        font-size: 1.5rem;
+        cursor: pointer;
+    }
+}
+
+/* =============================================
+   ANIMATION ADJUSTMENTS FOR MOBILE
+   ============================================= */
+@media (max-width: 768px) {
+    .fade-in {
+        animation: none;
+        opacity: 1;
+        transform: none;
+    }
+    
+    .delay-1, .delay-2, .delay-3, .delay-4 {
+        animation-delay: 0s;
+    }
+}
     </style>
 </head>
 <body>
