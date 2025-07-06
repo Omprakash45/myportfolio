@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -421,7 +422,6 @@
         .delay-2 { animation-delay: 0.4s; }
         .delay-3 { animation-delay: 0.6s; }
         .delay-4 { animation-delay: 0.8s; }
-
         /* =============================================
    TABLET DEVICES (768px - 1024px)
    ============================================= */
@@ -952,6 +952,7 @@ Transforming raw data into meaningful insights that drive business decisions.</p
                 </div>
                 <button type="submit" class="btn">Send Message</button>
             </form>
+      
         </div>
     </div>
 </section>
@@ -1031,38 +1032,50 @@ Transforming raw data into meaningful insights that drive business decisions.</p
             });
         });
 
-  // Contact Form Submission
+//   Contact Form Submission
+
+
+
 const contactForm = document.getElementById('contact-form');
 
-contactForm.addEventListener('submit', function(e) {
-    e.preventDefault();
-    
-    const formData = {
-        name: this.name.value,
-        email: this.email.value,
-        message: this.message.value
-    };
+  contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const formData = {
+          name: this.name.value.trim(),
+          email: this.email.value.trim(),
+          message: this.message.value.trim()
+      };
 
-    // Replace with your actual web app URL from Google Apps Script deployment
-    const webAppUrl = "https://script.google.com/macros/s/AKfycbwUWqhuoeQykvvmX9mBBvWfmiAeWkHDW3BvmM7FL9pFHQ9EzqQizVYN0-AhvSZsHuEJFw/exec";
-    
-    fetch(webAppUrl, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(formData)
-    })
-    .then(response => response.json())
-    .then(data => {
-        alert('Message sent successfully!');
-        contactForm.reset();
-    })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('Failed to send message. Please try again later.');
-    });
-});
+      const submitBtn = this.querySelector('button[type="submit"]');
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+
+      const webAppUrl = "https://script.google.com/macros/s/AKfycbw_dpOcaqIElDyKtKtC7tyOK_HmtiyJGMlHn_SSdYwZMxnuiiyJr7oP3SOfSUS9OTcEQg/exec";
+      
+      fetch(webAppUrl, {
+          method: 'POST',
+          mode: 'no-cors',
+          headers: {
+              'Content-Type': 'application/json',
+          },
+          body: JSON.stringify(formData)
+      })
+      .then(() => {
+          alert('Message sent successfully!');
+          contactForm.reset();
+      })
+      .catch((error) => {
+          console.error('Error:', error);
+          alert('Message sent (but CORS may block success check).');
+          contactForm.reset();
+      })
+      .finally(() => {
+          submitBtn.disabled = false;
+          submitBtn.textContent = originalBtnText;
+      });
+  });
 
         // Download Resume button
         const downloadResume = document.getElementById('downloadResume');
@@ -1113,34 +1126,7 @@ contactForm.addEventListener('submit', function(e) {
                 bar.style.width = '0';
             });
         });
-        document.getElementById("contact-form").addEventListener("submit", function(e) {
-    e.preventDefault();
-
-
-    
-    const formData = {
-      name: this.name.value,
-      email: this.email.value,
-      message: this.message.value
-    };
-
-    fetch("https://script.google.com/macros/s/AKfycbxYrcr7vjeTK-02X5gwLFkMZJixjJmHljWofXn1qNJADtFKK2iYYUHf_jx7aIAkqISGHg/exec", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify(formData)
-    })
-      .then(res => res.json())
-      .then(data => {
-        alert("Message sent successfully!");
-        this.reset();
-      })
-      .catch(err => {
-        alert("Failed to send message.");
-        console.error(err);
-      });
-  });
+  
     </script>
 </body>
 </html>
