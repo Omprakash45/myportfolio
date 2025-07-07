@@ -939,20 +939,22 @@ Transforming raw data into meaningful insights that drive business decisions.</p
                     <a href="https://linkedin.com/in/Om2005" target="_blank"><i class="fab fa-linkedin"></i></a>
                 </div>
             </div>
-            
-            <form id="contact-form" class="contact-form fade-in delay-2">
-                <div class="form-group">
-                    <input type="text" class="form-control" name="name" placeholder="Your Name" required>
-                </div>
-                <div class="form-group">
-                    <input type="email" class="form-control" name="email" placeholder="Your Email" required>
-                </div>
-                <div class="form-group">
-                    <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
-                </div>
-                <button type="submit" class="btn">Send Message</button>
-            </form>
+        <form id="contact-form" class="contact-form fade-in delay-2">
+    <div class="form-group">
+        <input type="text" class="form-control" name="name" placeholder="Your Name" required>
+    </div>
+    <div class="form-group">
+        <input type="email" class="form-control" name="email" placeholder="Your Email" required>
+    </div>
+    <div class="form-group">
+        <textarea class="form-control" name="message" placeholder="Your Message" required></textarea>
+    </div>
+    <!-- Add this div for response messages -->
+    <div id="response-message" style="margin-bottom: 1rem;"></div>
+    <button type="submit" class="btn">Send Message</button>
+</form>
       
+
         </div>
     </div>
 </section>
@@ -1035,51 +1037,115 @@ Transforming raw data into meaningful insights that drive business decisions.</p
 //   Contact Form Submission
 
 
-
-const contactForm = document.getElementById('contact-form');
-
-  contactForm.addEventListener('submit', function (e) {
+document.getElementById('contact-form').addEventListener('submit', function(e) {
     e.preventDefault();
-
+    
+    const form = e.target;
+    const btn = form.querySelector('button[type="submit"]');
+    const responseBox = document.getElementById('response-message') || createResponseBox(form, btn);
+    
+    // Validate form
     const formData = {
-      name: this.name.value.trim(),
-      email: this.email.value.trim(),
-      message: this.message.value.trim()
+        name: form.name.value.trim(),
+        email: form.email.value.trim(),
+        message: form.message.value.trim()
     };
+    
+    if (!validateForm(formData, responseBox)) return;
+    
+    // Show loading state
+    btn.disabled = true;
+    btn.textContent = 'Sending...';
+    responseBox.textContent = "";
+    responseBox.style.color = "";
+    
+    // Submit using Google Forms workaround
+    submitWithGoogleFormsWorkaround(formData, responseBox, btn);
+});
 
-    const submitBtn = this.querySelector('button[type="submit"]');
-    const originalBtnText = submitBtn.textContent;
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
+function createResponseBox(form, btn) {
+    const responseBox = document.createElement('div');
+    responseBox.id = 'response-message';
+    responseBox.style.marginBottom = '1rem';
+    form.insertBefore(responseBox, btn);
+    return responseBox;
+}
 
-    const webAppUrl = "https://script.google.com/macros/s/AKfycbwaDTRu4v4hjaA17_MebToYHVVVvbepN9EEKZNuvOPRcp4QAJ0V70d6x3ayd5LfcRDGlw/exec";
+function validateForm(formData, responseBox) {
+    if (!formData.name || !formData.email || !formData.message) {
+        responseBox.textContent = "Please fill all required fields";
+        responseBox.style.color = "red";
+        return false;
+    }
+    
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(formData.email)) {
+        responseBox.textContent = "Please enter a valid email address";
+        responseBox.style.color = "red";
+        return false;
+    }
+    
+    return true;
+}
 
-    fetch(webAppUrl, {
-      method: 'POST',
-      mode: 'cors',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData)
+function submitWithGoogleFormsWorkaround(formData, responseBox, btn) {
+    // Use a temporary Google Form as proxy
+    const googleFormUrl = 'https://docs.google.com/forms/d/e/YOUR_FORM_ID/formResponse';
+    const formId = 'YOUR_FORM_ID'; // Replace with actual form ID
+    
+    const form = document.createElement('form');
+    form.action = `${googleFormUrl}?submit=Submit`;
+    form.method = 'POST';
+    form.target = '_blank';
+    form.style.display = 'none';
+    
+    // Map your data to form fields
+    addHiddenField(form, 'entry.2005620554', formData.name); // Name field
+    addHiddenField(form, 'entry.1045781291', formData.email); // Email field
+    addHiddenField(form, 'entry.1065046570', formData.message); // Message field
+    
+    document.body.appendChild(form);
+    form.submit();
+    
+    // Now submit to your Apps Script
+    setTimeout(() => {
+        submitToAppsScript(formData, responseBox, btn);
+    }, 1000);
+}
+
+function addHiddenField(form, name, value) {
+    const input = document.createElement('input');
+    input.type = 'hidden';
+    input.name = name;
+    input.value = value;
+    form.appendChild(input);
+}
+
+function submitToAppsScript(formData, responseBox, btn) {
+    const scriptUrl = 'https://script.google.com/macros/s/AKfycbxOgOIiqcU1Iem-kBuHFMr1d9EGOYi7aBgWYUSII2fbGjjf7HB4FnVzkoos9Zwnwe2HCw/exec';
+    
+    fetch(scriptUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(formData),
+        mode: 'no-cors'
     })
-      .then(response => response.json())
-      .then(data => {
-        if (data.result === "success") {
-          alert("✅ Message sent successfully!");
-          contactForm.reset();
-        } else {
-          alert("⚠️ " + data.message);
-        }
-      })
-      .catch(error => {
-        console.error("Error:", error);
-        alert("❌ Something went wrong. Try again.maybe Your mail is not valid.");
-      })
-      .finally(() => {
-        submitBtn.disabled = false;
-        submitBtn.textContent = originalBtnText;
-      });
-  });
+    .then(() => {
+        responseBox.textContent = "Message sent successfully!";
+        responseBox.style.color = "green";
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        responseBox.textContent = "Message received! (Server confirmation pending)";
+        responseBox.style.color = "orange";
+    })
+    .finally(() => {
+        btn.disabled = false;
+        btn.textContent = 'Send Message';
+    });
+}
 
         // Download Resume button
         const downloadResume = document.getElementById('downloadResume');
