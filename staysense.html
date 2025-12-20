@@ -351,22 +351,12 @@
             margin-top: 30px;
         }
 
-        .dashboard-placeholder {
-            background: var(--bg-secondary);
-            height: 500px;
+        .dashboard-frame {
+            width: 100%;
+            height: 600px;
+            border: none;
             border-radius: 8px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            color: var(--text-secondary);
-            margin-bottom: 20px;
-        }
-
-        .dashboard-placeholder i {
-            font-size: 4rem;
-            margin-bottom: 20px;
-            color: var(--accent-primary);
+            overflow: hidden;
         }
 
         /* Insights Section */
@@ -588,6 +578,10 @@
             .tech-icon i {
                 font-size: 2.5rem;
             }
+            
+            .dashboard-frame {
+                height: 400px;
+            }
         }
 
         @media (max-width: 576px) {
@@ -607,6 +601,10 @@
                 flex-direction: column;
                 align-items: center;
                 gap: 15px;
+            }
+            
+            .dashboard-frame {
+                height: 300px;
             }
         }
     </style>
@@ -818,22 +816,13 @@
         <div class="container">
             <h2>Power BI Dashboard</h2>
             <div class="dashboard-container">
-                <div class="dashboard-placeholder">
-                    <i class="fas fa-chart-bar"></i>
-                    <p>Interactive Power BI Dashboard</p>
-                    <p>Insert your published Power BI link in the iframe below</p>
-                </div>
-                <!-- Replace the placeholder with your actual Power BI iframe -->
-                <!--
                 <iframe 
-                    title="StaySense Dashboard" 
-                    width="100%" 
-                    height="500" 
-                    src="YOUR_POWER_BI_LINK_HERE" 
+                    title="Staysense" 
+                    class="dashboard-frame"
+                    src="https://app.powerbi.com/view?r=eyJrIjoiOWE2NGY3NGYtNGU5OC00ZmU0LWFmZGYtOTg0Yjg3ZTQ5YTU2IiwidCI6IjBkYzU2ZDFiLTk3OGQtNDk4OS05ZDViLWViZDZhNWU5YTBmOCJ9" 
                     frameborder="0" 
                     allowFullScreen="true">
                 </iframe>
-                -->
             </div>
         </div>
     </section>
@@ -865,8 +854,8 @@
         <div class="container">
             <h2>Download Resources</h2>
             <div class="download-buttons">
-                <a href="#" class="btn"><i class="fas fa-download"></i> Dataset</a>
-                <a href="#" class="btn"><i class="fas fa-download"></i> Dashboard File</a>
+                <a href="oyo_cleaned_eda.csv" class="btn"><i class="fas fa-download"></i> Dataset</a>
+                <a href ='Staysense.pdf' class="btn"><i class="fas fa-download"></i> Dashboard File</a>
                 <a href="#" class="btn"><i class="fas fa-download"></i> Project Report</a>
                 <a href="#" class="btn btn-secondary"><i class="fas fa-download"></i> Full Documentation</a>
             </div>
@@ -887,11 +876,11 @@
                     <a href="#download">Downloads</a>
                 </div>
                 <div class="social-links">
-                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
-                    <a href="#"><i class="fab fa-github"></i></a>
-                    <a href="#"><i class="fas fa-envelope"></i></a>
+                    <a href="https://www.linkedin.com/in/om2005/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_contact_details%3BeYLRnD6PRSK4jYgmJ7C4qg%3D%3D"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="https://github.com/Omprakash45/myportfolio"><i class="fab fa-github"></i></a>
+                    <a href="mailto:ompx07.data@gmail.com"><i class="fas fa-envelope"></i></a>
                 </div>
-                <p class="copyright">© 2023 StaySense. All rights reserved.</p>
+                <p class="copyright">© 2025 StaySense. All rights reserved.</p>
             </div>
         </div>
     </footer>
